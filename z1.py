@@ -61,4 +61,6 @@ itogo = []
 for i in rows_cols:
     if i==1000:break
     else:itogo.append(round(test(i), 5))
+
+    
 print(itogo)
