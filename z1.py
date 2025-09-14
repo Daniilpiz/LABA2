@@ -1,7 +1,28 @@
 import time
 import random
 
-import matplotlib as plt
+from matplotlib import pyplot as plt
+def fill_mas(mas, var):
+    if var == 1:
+        for i in range(len(mas)):
+            mas[i] = i
+        return mas
+    if var == 2:
+        for i in range(len(mas)):
+            mas[i] = len(mas) - i
+        return mas
+    if var == 3:
+        for i in range(len(mas)):
+            if i<len(mas)/2:
+                 mas[i] = i
+            else:
+                mas[i] = len(mas) - i
+        return mas
+    if var == 4:
+        for i in range(len(mas)):
+            mas[i] = random.randint(-100, 100)
+        return mas
+    
 
 def shell(nums):
     inc = len(nums) // 2
@@ -75,31 +96,88 @@ def test(razm):
     time_of_work = end - start
     print(f"время премножения матриц {razm}X{razm} составило {time_of_work} секунд")
     return time_of_work
+
+def sortir(mas, var):
+    if var == 1:
+        return shell(mas)
+    if var == 2:
+        return built_in_sort(mas)
+    if var == 3:
+        return quicksort(mas)
     
+import time
+  # Функция для обработки одного массива
+def process_array(arr, fill_idx, result_list, time_list):
+    arr = fill_mas(arr, fill_idx)
+    for sort_type in [1, 2, 3]:
+        start = time.time()
+        sorted_arr = sortir(arr, sort_type)
+        end = time.time()
+            
+        result_list.append(sorted_arr)
+        time_list.append(end - start)
+        
+def sortirovki():
+    c = [[0] * 10000 for _ in range(4)]
+    d = [[0] * 30000 for _ in range(4)]
+
+    result_1, time_1 = [], []
+    result_2, time_2 = [], []
+
+    # Обрабатываем массивы c
+    for i in range(4):
+        process_array(c[i], i + 1, result_1, time_1)
+
+    # Обрабатываем массивы d
+    for i in range(4):
+        process_array(d[i], i + 1, result_2, time_2)
+        
+    return result_1, result_2, time_1, time_2
+
 def draw(X, Y):
     plt.plot(X, Y)
+
     plt.xlabel("Размерности матриц")
     plt.ylabel("Время работы")
+
     plt.title("Перемножение матриц") 
+
     plt.show()
 
+def main():
+    choose = meet()
+    if choose == 1:
+        sortirovki()
+    if choose == 2:
+        rows_cols = [100]
+        while len(rows_cols)!=19:
 
-if __name__=="__main__":
-    rows_cols = [100]
-    while len(rows_cols)!=19:
+            if rows_cols[len(rows_cols)-1]<1000:
+                rows_cols.append(rows_cols[len(rows_cols)-1]+100)
 
-        if rows_cols[len(rows_cols)-1]<1000:
-            rows_cols.append(rows_cols[len(rows_cols)-1]+100)
-
-        else: rows_cols.append(rows_cols[len(rows_cols)-1]+1000)
+            else: rows_cols.append(rows_cols[len(rows_cols)-1]+1000)
 
 # print(rows_cols)
 
 
-    itogo = []
+        itogo = []
 
-    for i in rows_cols:
-        if i==5000:break
-        else:itogo.append(round(test(i), 5))
+        for i in rows_cols:
+        # if i==1000:break
+        # else:
+            itogo.append(round(test(i), 5))
 
-    print(itogo, sum(itogo)/3600)
+        print(itogo, sum(itogo)/3600)
+        draw(rows_cols, itogo)
+
+def meet():
+    while True:
+        print("Выберите сравнение сортировок(ввод 1) или перемножение матриц(ввод 2)\n")
+        choose = int(input())
+        if not (1<=choose<=2):
+            print("Вы ввели не 1 или 2 повторите ввод")
+        else: return choose
+
+
+if __name__=="__main__":
+    main()
