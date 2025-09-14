@@ -105,8 +105,7 @@ def sortir(mas, var):
     if var == 3:
         return quicksort(mas)
     
-import time
-  # Функция для обработки одного массива
+
 def process_array(arr, fill_idx, result_list, time_list):
     arr = fill_mas(arr, fill_idx)
     for sort_type in [1, 2, 3]:
@@ -116,7 +115,7 @@ def process_array(arr, fill_idx, result_list, time_list):
             
         result_list.append(sorted_arr)
         time_list.append(end - start)
-        
+
 def sortirovki():
     c = [[0] * 10000 for _ in range(4)]
     d = [[0] * 30000 for _ in range(4)]
@@ -147,7 +146,18 @@ def draw(X, Y):
 def main():
     choose = meet()
     if choose == 1:
-        sortirovki()
+        res_1, res_2, tim_1, tim_2 = sortirovki()
+        print(f"""
+Вид\Набор данных          Возрастающий               Убывающий             Возраст-убыв           Случайный
+сортировки 
+
+Сортировка Шелла           {tim_1[0]}                 {tim_1[1]}            {tim_1[2]}               {tim_1[3]}
+
+Встроенная сортировка      {tim_1[4]}                 {tim_1[5]}            {tim_1[6]}               {tim_1[7]}
+
+Быстрая Сортировка         {tim_1[8]}                 {tim_1[9]}            {tim_1[10]}              {tim_1[11]}                      
+                                         
+              """)
     if choose == 2:
         rows_cols = [100]
         while len(rows_cols)!=19:
