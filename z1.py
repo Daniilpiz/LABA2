@@ -186,8 +186,9 @@ def main():
         itogo = []
 
         for i in rows_cols:
-        # if i==1000:break
-        # else:
+            if i==1000:
+                break
+        else:
             itogo.append(round(test(i), 5))
 
         print(itogo, sum(itogo)/3600)
