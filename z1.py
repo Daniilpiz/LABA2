@@ -107,18 +107,19 @@ def sortir(mas, var):
     
 
 def process_array(arr, fill_idx, result_list, time_list):
-    arr = fill_mas(arr, fill_idx)
-    for sort_type in [1, 2, 3]:
-        start = time.time()
-        sorted_arr = sortir(arr, sort_type)
-        end = time.time()
+        arr = fill_mas(arr, fill_idx)
+        for sort_type in [1, 2, 3]:
+            # Используем time.perf_counter() для большей точности
+            start = time.perf_counter()
+            sorted_arr = sortir(arr, sort_type)
+            end = time.perf_counter()
             
-        result_list.append(sorted_arr)
-        time_list.append(end - start)
+            result_list.append(sorted_arr)
+            time_list.append(end - start)
 
 def sortirovki():
-    c = [[0] * 10000 for _ in range(4)]
-    d = [[0] * 30000 for _ in range(4)]
+    c = [[0] * 100000 for _ in range(4)]
+    d = [[0] * 300000 for _ in range(4)]
 
     result_1, time_1 = [], []
     result_2, time_2 = [], []
@@ -147,27 +148,27 @@ def main():
     choose = meet()
     if choose == 1:
         res_1, res_2, tim_1, tim_2 = sortirovki()
-        print(f"""
-Вид\Набор данных          Возрастающий               Убывающий             Возраст-убыв           Случайный
+        print(f"""100.000 чисел
+Вид\Набор данных             Возрастающий________Убывающий__________Возраст-убыв___________Случайный
 сортировки 
 
-Сортировка Шелла           {tim_1[0]}                 {tim_1[1]}            {tim_1[2]}               {tim_1[3]}
+Сортировка Шелла              {round(tim_1[0],5)}______________{round(tim_1[1],5)}______________{round(tim_1[2],5)}______________{round(tim_1[3],5)}
 
-Встроенная сортировка      {tim_1[4]}                 {tim_1[5]}            {tim_1[6]}               {tim_1[7]}
+Встроенная сортировка         {round(tim_1[4],5)}______________{round(tim_1[5],5)}______________{round(tim_1[6],5)}______________{round(tim_1[7],5)}
 
-Быстрая Сортировка         {tim_1[8]}                 {tim_1[9]}            {tim_1[10]}              {tim_1[11]}                      
+Быстрая Сортировка            {round(tim_1[8],5)}______________{round(tim_1[9],5)}______________{round(tim_1[10],5)}______________{round(tim_1[11],5)}                     
                                          
               """)
         
-        print(f"""
-Вид\Набор данных          Возрастающий               Убывающий             Возраст-убыв           Случайный
+        print(f"""300.000 чисел
+Вид\Набор данных             Возрастающий________Убывающий__________Возраст-убыв___________Случайный
 сортировки 
 
-Сортировка Шелла           {tim_2[0]}                 {tim_2[1]}            {tim_2[2]}               {tim_2[3]}
+Сортировка Шелла              {round(tim_2[0],5)}______________{round(tim_2[1],5)}______________{round(tim_2[2],5)}______________{round(tim_2[3],5)}
 
-Встроенная сортировка      {tim_2[4]}                 {tim_2[5]}            {tim_2[6]}               {tim_2[7]}
+Встроенная сортировка         {round(tim_2[4],5)}______________{round(tim_2[5],5)}______________{round(tim_2[6],5)}______________{round(tim_2[7],5)}
 
-Быстрая Сортировка         {tim_2[8]}                 {tim_2[9]}            {tim_2[10]}              {tim_2[11]}                      
+Быстрая Сортировка            {round(tim_2[8],5)}______________{round(tim_2[9],5)}______________{round(tim_2[10],5)}______________{round(tim_2[11],5)}                     
                                          
               """)
     if choose == 2:
